@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "noshorts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "noooo youtube shorts — YouTube 쇼츠 접속을 막아 쇼츠 중독을 끊어줍니다.",
   "permissions": ["storage"],
   "host_permissions": ["*://*.youtube.com/*"],
@@ -27,6 +27,12 @@
       "js": ["src/content.js"],
       "run_at": "document_start",
       "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/blocked.html", "src/blocked.js"],
+      "matches": ["*://*.youtube.com/*"]
     }
   ]
 }
