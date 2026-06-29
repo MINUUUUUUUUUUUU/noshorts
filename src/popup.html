@@ -113,8 +113,8 @@
 
     <div class="row" id="row-enabled">
       <div>
-        <div class="label">쇼츠 차단</div>
-        <div class="desc">쇼츠 페이지와 진입점을 막습니다.</div>
+        <div class="label" data-i18n="popupBlockLabel">Block Shorts</div>
+        <div class="desc" data-i18n="popupBlockDesc">Blocks Shorts pages and entry points.</div>
       </div>
       <label class="switch">
         <input type="checkbox" id="toggle-enabled" />
@@ -124,8 +124,8 @@
 
     <div class="row" id="row-show">
       <div>
-        <div class="label">쇼츠 영상 표시</div>
-        <div class="desc">켜면 같은 영상을 일반 플레이어로, 끄면 차단 페이지로 보냅니다.</div>
+        <div class="label" data-i18n="popupShowLabel">Show Shorts video</div>
+        <div class="desc" data-i18n="popupShowDesc">On: open as a normal video. Off: send to the block page.</div>
       </div>
       <label class="switch">
         <input type="checkbox" id="toggle-show" />
@@ -133,7 +133,7 @@
       </label>
     </div>
 
-    <div class="status" id="status">상태를 불러오는 중…</div>
+    <div class="status" id="status" data-i18n="statusLoading">Loading status…</div>
     <script src="popup.js"></script>
   </body>
 </html>

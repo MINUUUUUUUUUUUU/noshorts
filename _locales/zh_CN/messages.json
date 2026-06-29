@@ -1,0 +1,21 @@
+{
+  "appDescription": {
+    "message": "noooo youtube shorts — 屏蔽 YouTube Shorts，戒掉短视频的无限刷屏。"
+  },
+  "popupBlockLabel": { "message": "屏蔽 Shorts" },
+  "popupBlockDesc": { "message": "屏蔽 Shorts 页面和入口。" },
+  "popupShowLabel": { "message": "显示 Shorts 视频" },
+  "popupShowDesc": { "message": "开启：用普通播放器打开。关闭：跳转到拦截页面。" },
+  "statusLoading": { "message": "正在加载状态…" },
+  "statusOff": { "message": "Shorts 屏蔽已关闭。" },
+  "statusShow": { "message": "将以普通视频页面打开 Shorts。" },
+  "statusBlock": { "message": "用拦截页面屏蔽 Shorts。" },
+  "blockedTitle": { "message": "已屏蔽 Shorts — noshorts" },
+  "blockedHeading": { "message": "先别刷 Shorts 啦 ✋" },
+  "blockedBody": {
+    "message": "noshorts 拦截了这个 YouTube Short。与其无尽地刷短视频，不如去找你真正想看的内容。"
+  },
+  "blockedHome": { "message": "前往 YouTube 首页" },
+  "blockedBack": { "message": "返回上一页" },
+  "blockedHint": { "message": "如需关闭屏蔽，请点击工具栏上的 noshorts 图标进行切换。" }
+}

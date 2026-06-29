@@ -11,6 +11,19 @@ const toggleShow = document.getElementById("toggle-show");
 const rowShow = document.getElementById("row-show");
 const status = document.getElementById("status");
 
+// chrome.i18n 으로 메시지 조회 (없으면 기존 텍스트 유지)
+function t(key) {
+  return chrome.i18n.getMessage(key) || "";
+}
+
+// data-i18n 속성이 붙은 모든 요소를 사용자 언어로 채운다.
+function applyStaticI18n() {
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const msg = t(el.dataset.i18n);
+    if (msg) el.textContent = msg;
+  });
+}
+
 function render(enabled, showVideo) {
   toggleEnabled.checked = enabled;
   toggleShow.checked = showVideo;
@@ -19,13 +32,15 @@ function render(enabled, showVideo) {
   rowShow.classList.toggle("disabled", !enabled);
 
   if (!enabled) {
-    status.textContent = "쇼츠 차단이 꺼져 있습니다.";
+    status.textContent = t("statusOff");
   } else if (showVideo) {
-    status.textContent = "쇼츠를 일반 영상 페이지로 보냅니다.";
+    status.textContent = t("statusShow");
   } else {
-    status.textContent = "쇼츠를 차단 페이지로 막습니다.";
+    status.textContent = t("statusBlock");
   }
 }
+
+applyStaticI18n();
 
 // 저장된 상태 로드 (기본값: 차단 켜짐 / 영상 표시 끔)
 chrome.storage.sync.get(

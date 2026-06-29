@@ -1,0 +1,21 @@
+{
+  "appDescription": {
+    "message": "noooo youtube shorts — YouTube ショートをブロックして、短い動画の無限スクロールをやめましょう。"
+  },
+  "popupBlockLabel": { "message": "ショートをブロック" },
+  "popupBlockDesc": { "message": "ショートのページと入口をブロックします。" },
+  "popupShowLabel": { "message": "ショート動画を表示" },
+  "popupShowDesc": { "message": "オン: 通常のプレーヤーで再生。オフ: ブロックページへ移動。" },
+  "statusLoading": { "message": "状態を読み込み中…" },
+  "statusOff": { "message": "ショートのブロックはオフです。" },
+  "statusShow": { "message": "ショートを通常の動画ページで開きます。" },
+  "statusBlock": { "message": "ショートをブロックページで遮断します。" },
+  "blockedTitle": { "message": "ショートをブロックしました — noshorts" },
+  "blockedHeading": { "message": "ショートはひと休み ✋" },
+  "blockedBody": {
+    "message": "noshorts が YouTube ショートをブロックしました。短い動画の無限スクロールではなく、本当に見たかったものを探しましょう。"
+  },
+  "blockedHome": { "message": "YouTube ホームへ" },
+  "blockedBack": { "message": "前のページへ" },
+  "blockedHint": { "message": "ブロックを解除するには、ツールバーの noshorts アイコンから切り替えてください。" }
+}

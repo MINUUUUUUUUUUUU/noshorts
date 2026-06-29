@@ -1,0 +1,21 @@
+{
+  "appDescription": {
+    "message": "noooo youtube shorts — Block YouTube Shorts and quit the short-video doomscroll."
+  },
+  "popupBlockLabel": { "message": "Block Shorts" },
+  "popupBlockDesc": { "message": "Blocks Shorts pages and entry points." },
+  "popupShowLabel": { "message": "Show Shorts video" },
+  "popupShowDesc": { "message": "On: open as a normal video. Off: send to the block page." },
+  "statusLoading": { "message": "Loading status…" },
+  "statusOff": { "message": "Shorts blocking is off." },
+  "statusShow": { "message": "Opening Shorts as normal video pages." },
+  "statusBlock": { "message": "Blocking Shorts with the block page." },
+  "blockedTitle": { "message": "Shorts blocked — noshorts" },
+  "blockedHeading": { "message": "Take a break from Shorts ✋" },
+  "blockedBody": {
+    "message": "noshorts blocked this YouTube Short. Instead of endless short videos, go find what you actually wanted to watch."
+  },
+  "blockedHome": { "message": "Go to YouTube home" },
+  "blockedBack": { "message": "Go back" },
+  "blockedHint": { "message": "To turn blocking off, use the noshorts icon in your toolbar." }
+}

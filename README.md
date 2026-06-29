@@ -15,6 +15,8 @@ YouTube **쇼츠(Shorts)** 의 무한 스크롤에 빠지지 않도록 막아주
 - YouTube는 SPA(단일 페이지 앱)라 앱 내부 이동도 함께 처리
   (내비게이션 이벤트 + DOM 변화 감시 + 폴링 안전망)
 - 설정은 `chrome.storage.sync` 에 저장
+- **다국어 지원**: 브라우저 언어에 맞춰 UI가 자동 표시 (`chrome.i18n` / `_locales`)
+  — 영어(기본)·한국어·일본어·중국어(간체)·스페인어·프랑스어·독일어. 미지원 언어는 영어로 폴백.
 
 ## 기술 / 정책 메모
 
@@ -36,12 +38,14 @@ YouTube **쇼츠(Shorts)** 의 무한 스크롤에 빠지지 않도록 막아주
 ```
 noshorts/
 ├── manifest.json        # MV3 매니페스트
+├── _locales/            # 다국어 메시지 (en/ko/ja/zh_CN/es/fr/de)
+│   └── <lang>/messages.json
 ├── src/
 │   ├── content.js       # 쇼츠 감지·차단/리다이렉트 + 진입점 숨김
 │   ├── blocked.html     # 차단 안내 페이지
-│   ├── blocked.js       # 차단 페이지 버튼 동작
+│   ├── blocked.js       # 차단 페이지 버튼 동작 + i18n 적용
 │   ├── popup.html       # 토글 UI (차단 on/off, 영상 표시)
-│   └── popup.js         # 토글 상태 저장/표시
+│   └── popup.js         # 토글 상태 저장/표시 + i18n 적용
 └── icons/               # 확장 아이콘 (16/32/48/128)
 ```
 

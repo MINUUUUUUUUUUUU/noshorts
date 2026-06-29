@@ -1,0 +1,21 @@
+{
+  "appDescription": {
+    "message": "noooo youtube shorts — YouTube 쇼츠를 막아 짧은 영상 무한 스크롤을 끊어줍니다."
+  },
+  "popupBlockLabel": { "message": "쇼츠 차단" },
+  "popupBlockDesc": { "message": "쇼츠 페이지와 진입점을 막습니다." },
+  "popupShowLabel": { "message": "쇼츠 영상 표시" },
+  "popupShowDesc": { "message": "켜면 같은 영상을 일반 플레이어로, 끄면 차단 페이지로 보냅니다." },
+  "statusLoading": { "message": "상태를 불러오는 중…" },
+  "statusOff": { "message": "쇼츠 차단이 꺼져 있습니다." },
+  "statusShow": { "message": "쇼츠를 일반 영상 페이지로 보냅니다." },
+  "statusBlock": { "message": "쇼츠를 차단 페이지로 막습니다." },
+  "blockedTitle": { "message": "쇼츠 차단됨 — noshorts" },
+  "blockedHeading": { "message": "쇼츠는 잠시 멈춰요 ✋" },
+  "blockedBody": {
+    "message": "noshorts가 YouTube 쇼츠를 막았습니다. 짧은 영상의 무한 스크롤 대신, 진짜 보고 싶었던 걸 찾아보세요."
+  },
+  "blockedHome": { "message": "유튜브 홈으로" },
+  "blockedBack": { "message": "이전 페이지로" },
+  "blockedHint": { "message": "차단을 끄려면 툴바의 noshorts 아이콘에서 토글하세요." }
+}

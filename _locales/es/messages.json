@@ -1,0 +1,21 @@
+{
+  "appDescription": {
+    "message": "noooo youtube shorts — Bloquea los Shorts de YouTube y deja el scroll infinito de vídeos cortos."
+  },
+  "popupBlockLabel": { "message": "Bloquear Shorts" },
+  "popupBlockDesc": { "message": "Bloquea las páginas y los accesos a Shorts." },
+  "popupShowLabel": { "message": "Mostrar vídeo de Shorts" },
+  "popupShowDesc": { "message": "Activado: se abre como vídeo normal. Desactivado: va a la página de bloqueo." },
+  "statusLoading": { "message": "Cargando estado…" },
+  "statusOff": { "message": "El bloqueo de Shorts está desactivado." },
+  "statusShow": { "message": "Abriendo los Shorts como vídeos normales." },
+  "statusBlock": { "message": "Bloqueando los Shorts con la página de bloqueo." },
+  "blockedTitle": { "message": "Shorts bloqueado — noshorts" },
+  "blockedHeading": { "message": "Tómate un descanso de los Shorts ✋" },
+  "blockedBody": {
+    "message": "noshorts ha bloqueado este Short de YouTube. En lugar de vídeos cortos sin fin, busca lo que de verdad querías ver."
+  },
+  "blockedHome": { "message": "Ir al inicio de YouTube" },
+  "blockedBack": { "message": "Volver" },
+  "blockedHint": { "message": "Para desactivar el bloqueo, usa el icono de noshorts en la barra de herramientas." }
+}
