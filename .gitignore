@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build / packaging 산출물
+dist/
+build/
+*.zip
+*.crx
+*.pem
+
+# 환경변수 / 비밀
+.env
+.env.*
+*.key
+
+# OS / 에디터
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

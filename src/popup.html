@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>noshorts</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        width: 240px;
+        margin: 0;
+        padding: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #ffffff;
+        color: #0f0f0f;
+      }
+      h1 {
+        font-size: 16px;
+        margin: 0 0 4px;
+      }
+      p {
+        font-size: 12px;
+        color: #606060;
+        margin: 0 0 16px;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .label {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      /* 토글 스위치 */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 46px;
+        height: 26px;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        inset: 0;
+        background-color: #ccc;
+        transition: 0.2s;
+        border-radius: 26px;
+      }
+      .slider::before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: #fff;
+        transition: 0.2s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: #cc0000;
+      }
+      input:checked + .slider::before {
+        transform: translateX(20px);
+      }
+      .status {
+        margin-top: 14px;
+        font-size: 12px;
+        text-align: center;
+        color: #606060;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #0f0f0f;
+          color: #f1f1f1;
+        }
+        p,
+        .status {
+          color: #aaaaaa;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>noshorts</h1>
+    <p>noooo youtube shorts</p>
+    <div class="row">
+      <span class="label">쇼츠 차단</span>
+      <label class="switch">
+        <input type="checkbox" id="toggle" />
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="status" id="status">상태를 불러오는 중…</div>
+    <script src="popup.js"></script>
+  </body>
+</html>
