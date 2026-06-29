@@ -9,7 +9,7 @@
         color-scheme: light dark;
       }
       body {
-        width: 240px;
+        width: 260px;
         margin: 0;
         padding: 16px;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -18,9 +18,9 @@
       }
       h1 {
         font-size: 16px;
-        margin: 0 0 4px;
+        margin: 0 0 2px;
       }
-      p {
+      .subtitle {
         font-size: 12px;
         color: #606060;
         margin: 0 0 16px;
@@ -29,10 +29,24 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: 10px 0;
+      }
+      .row + .row {
+        border-top: 1px solid #eee;
+      }
+      .row.disabled {
+        opacity: 0.4;
+        pointer-events: none;
       }
       .label {
         font-size: 14px;
         font-weight: 600;
+      }
+      .desc {
+        font-size: 11px;
+        color: #909090;
+        margin-top: 2px;
+        max-width: 160px;
       }
       /* 토글 스위치 */
       .switch {
@@ -40,6 +54,7 @@
         display: inline-block;
         width: 46px;
         height: 26px;
+        flex: none;
       }
       .switch input {
         opacity: 0;
@@ -82,23 +97,42 @@
           background: #0f0f0f;
           color: #f1f1f1;
         }
-        p,
+        .subtitle,
         .status {
           color: #aaaaaa;
+        }
+        .row + .row {
+          border-top-color: #2a2a2a;
         }
       }
     </style>
   </head>
   <body>
     <h1>noshorts</h1>
-    <p>noooo youtube shorts</p>
-    <div class="row">
-      <span class="label">쇼츠 차단</span>
+    <p class="subtitle">noooo youtube shorts</p>
+
+    <div class="row" id="row-enabled">
+      <div>
+        <div class="label">쇼츠 차단</div>
+        <div class="desc">쇼츠 페이지와 진입점을 막습니다.</div>
+      </div>
       <label class="switch">
-        <input type="checkbox" id="toggle" />
+        <input type="checkbox" id="toggle-enabled" />
         <span class="slider"></span>
       </label>
     </div>
+
+    <div class="row" id="row-show">
+      <div>
+        <div class="label">쇼츠 영상 표시</div>
+        <div class="desc">켜면 같은 영상을 일반 플레이어로, 끄면 차단 페이지로 보냅니다.</div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="toggle-show" />
+        <span class="slider"></span>
+      </label>
+    </div>
+
     <div class="status" id="status">상태를 불러오는 중…</div>
     <script src="popup.js"></script>
   </body>
