@@ -26,24 +26,21 @@
       .card {
         max-width: 420px;
       }
-      .badge {
-        width: 84px;
-        height: 84px;
+      .logo-card {
+        width: 180px;
+        height: 180px;
         margin: 0 auto 20px;
-        border-radius: 50%;
-        border: 6px solid #cc0000;
-        position: relative;
+        background: #ffffff;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
       }
-      .badge::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 90px;
-        height: 6px;
-        background: #cc0000;
-        transform: translate(-50%, -50%) rotate(45deg);
-        border-radius: 3px;
+      .logo-card img {
+        width: 150px;
+        height: 150px;
+        display: block;
       }
       h1 {
         font-size: 22px;
@@ -87,7 +84,7 @@
   </head>
   <body>
     <div class="card">
-      <div class="badge"></div>
+      <div class="logo-card"><img src="../icons/logo.png" alt="noshorts" /></div>
       <h1 data-i18n="blockedHeading">Take a break from Shorts ✋</h1>
       <p data-i18n="blockedBody">
         noshorts blocked this YouTube Short. Instead of endless short videos,

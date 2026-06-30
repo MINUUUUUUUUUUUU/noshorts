@@ -1,5 +1,9 @@
 # noshorts
 
+<p align="center">
+  <img src="icons/logo.png" alt="noshorts" width="200" />
+</p>
+
 > noooo youtube shorts — YouTube 쇼츠 접속을 막아 쇼츠 중독을 끊어주는 Chrome 확장 프로그램.
 
 YouTube **쇼츠(Shorts)** 의 무한 스크롤에 빠지지 않도록 막아주는 확장입니다.
@@ -46,7 +50,7 @@ noshorts/
 │   ├── blocked.js       # 차단 페이지 버튼 동작 + i18n 적용
 │   ├── popup.html       # 토글 UI (차단 on/off, 영상 표시)
 │   └── popup.js         # 토글 상태 저장/표시 + i18n 적용
-└── icons/               # 확장 아이콘 (16/32/48/128)
+└── icons/               # 확장 아이콘 (16/32/48/128) + logo.png(마스터)
 ```
 
 ## 라이선스
