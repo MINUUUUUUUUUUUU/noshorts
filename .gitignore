@@ -13,6 +13,9 @@ build/
 .env.*
 *.key
 
+# 자동 push 로그
+.auto-push.log
+
 # OS / 에디터
 .DS_Store
 Thumbs.db

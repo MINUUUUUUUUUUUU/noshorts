@@ -1,0 +1,50 @@
+name: Release extension
+
+# main 에 push될 때 manifest.json 의 버전을 읽어,
+# 같은 버전 태그가 아직 없으면 git 태그 + GitHub Release(확장 zip 첨부)를 만든다.
+# Actions 자체 토큰(GITHUB_TOKEN)만 사용하므로 별도 PAT 저장이 필요 없다.
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read version from manifest
+        id: ver
+        run: echo "version=$(node -p "require('./manifest.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Check if release already exists
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "v${{ steps.ver.outputs.version }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "ℹ️ Release v${{ steps.ver.outputs.version }} already exists — skipping."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Package extension
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          zip -r "noshorts-v${{ steps.ver.outputs.version }}.zip" \
+            manifest.json src icons _locales
+
+      - name: Create release
+        if: steps.check.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "v${{ steps.ver.outputs.version }}" \
+            "noshorts-v${{ steps.ver.outputs.version }}.zip" \
+            --title "noshorts v${{ steps.ver.outputs.version }}" \
+            --notes "manifest 버전 ${{ steps.ver.outputs.version }} 자동 릴리스. 압축해제 후 chrome://extensions 에서 로드하거나 zip을 그대로 사용하세요."
