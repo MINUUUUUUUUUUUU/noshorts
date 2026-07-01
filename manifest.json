@@ -1,14 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "noshorts",
-  "version": "1.2.0",
+  "name": "YouTube Shorts Blocker",
+  "version": "1.3.0",
   "default_locale": "en",
   "description": "__MSG_appDescription__",
   "permissions": ["storage"],
   "host_permissions": ["*://*.youtube.com/*"],
   "action": {
     "default_popup": "src/popup.html",
-    "default_title": "noshorts",
+    "default_title": "YouTube Shorts Blocker",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",

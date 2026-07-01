@@ -10,12 +10,12 @@
   "statusOff": { "message": "쇼츠 차단이 꺼져 있습니다." },
   "statusShow": { "message": "쇼츠를 일반 영상 페이지로 보냅니다." },
   "statusBlock": { "message": "쇼츠를 차단 페이지로 막습니다." },
-  "blockedTitle": { "message": "쇼츠 차단됨 — noshorts" },
+  "blockedTitle": { "message": "쇼츠 차단됨 — YouTube Shorts Blocker" },
   "blockedHeading": { "message": "쇼츠는 잠시 멈춰요 ✋" },
   "blockedBody": {
-    "message": "noshorts가 YouTube 쇼츠를 막았습니다. 짧은 영상의 무한 스크롤 대신, 진짜 보고 싶었던 걸 찾아보세요."
+    "message": "쇼츠를 차단했습니다. 짧은 영상의 무한 스크롤 대신, 진짜 보고 싶었던 걸 찾아보세요."
   },
   "blockedHome": { "message": "유튜브 홈으로" },
   "blockedBack": { "message": "이전 페이지로" },
-  "blockedHint": { "message": "차단을 끄려면 툴바의 noshorts 아이콘에서 토글하세요." }
+  "blockedHint": { "message": "차단을 끄려면 툴바의 확장 아이콘에서 토글하세요." }
 }
