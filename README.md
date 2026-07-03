@@ -1,7 +1,7 @@
-# noshorts
+# YouTube Shorts Blocker
 
 <p align="center">
-  <img src="icons/logo.png" alt="noshorts" width="200" />
+  <img src="icons/logo.png" alt="YouTube Shorts Blocker" width="200" />
 </p>
 
 > noooo youtube shorts — YouTube 쇼츠 접속을 막아 쇼츠 중독을 끊어주는 Chrome 확장 프로그램.

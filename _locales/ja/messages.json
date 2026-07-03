@@ -10,12 +10,12 @@
   "statusOff": { "message": "ショートのブロックはオフです。" },
   "statusShow": { "message": "ショートを通常の動画ページで開きます。" },
   "statusBlock": { "message": "ショートをブロックページで遮断します。" },
-  "blockedTitle": { "message": "ショートをブロックしました — noshorts" },
+  "blockedTitle": { "message": "ショートをブロックしました — YouTube Shorts Blocker" },
   "blockedHeading": { "message": "ショートはひと休み ✋" },
   "blockedBody": {
-    "message": "noshorts が YouTube ショートをブロックしました。短い動画の無限スクロールではなく、本当に見たかったものを探しましょう。"
+    "message": "ショートをブロックしました。短い動画の無限スクロールではなく、本当に見たかったものを探しましょう。"
   },
   "blockedHome": { "message": "YouTube ホームへ" },
   "blockedBack": { "message": "前のページへ" },
-  "blockedHint": { "message": "ブロックを解除するには、ツールバーの noshorts アイコンから切り替えてください。" }
+  "blockedHint": { "message": "ブロックを解除するには、ツールバーの拡張機能アイコンから切り替えてください。" }
 }

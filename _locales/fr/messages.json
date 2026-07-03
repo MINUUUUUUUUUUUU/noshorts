@@ -10,12 +10,12 @@
   "statusOff": { "message": "Le blocage des Shorts est désactivé." },
   "statusShow": { "message": "Ouverture des Shorts comme des vidéos normales." },
   "statusBlock": { "message": "Blocage des Shorts avec la page de blocage." },
-  "blockedTitle": { "message": "Shorts bloqué — noshorts" },
+  "blockedTitle": { "message": "Shorts bloqué — YouTube Shorts Blocker" },
   "blockedHeading": { "message": "Faites une pause loin des Shorts ✋" },
   "blockedBody": {
-    "message": "noshorts a bloqué ce Short YouTube. Au lieu de vidéos courtes à l’infini, allez trouver ce que vous vouliez vraiment regarder."
+    "message": "Ce Short a été bloqué. Au lieu de vidéos courtes à l’infini, allez trouver ce que vous vouliez vraiment regarder."
   },
   "blockedHome": { "message": "Aller à l’accueil YouTube" },
   "blockedBack": { "message": "Retour" },
-  "blockedHint": { "message": "Pour désactiver le blocage, utilisez l’icône noshorts dans votre barre d’outils." }
+  "blockedHint": { "message": "Pour désactiver le blocage, utilisez l’icône de l’extension dans votre barre d’outils." }
 }

@@ -10,12 +10,12 @@
   "statusOff": { "message": "Shorts 屏蔽已关闭。" },
   "statusShow": { "message": "将以普通视频页面打开 Shorts。" },
   "statusBlock": { "message": "用拦截页面屏蔽 Shorts。" },
-  "blockedTitle": { "message": "已屏蔽 Shorts — noshorts" },
+  "blockedTitle": { "message": "已屏蔽 Shorts — YouTube Shorts Blocker" },
   "blockedHeading": { "message": "先别刷 Shorts 啦 ✋" },
   "blockedBody": {
-    "message": "noshorts 拦截了这个 YouTube Short。与其无尽地刷短视频，不如去找你真正想看的内容。"
+    "message": "已拦截这个 Short。与其无尽地刷短视频，不如去找你真正想看的内容。"
   },
   "blockedHome": { "message": "前往 YouTube 首页" },
   "blockedBack": { "message": "返回上一页" },
-  "blockedHint": { "message": "如需关闭屏蔽，请点击工具栏上的 noshorts 图标进行切换。" }
+  "blockedHint": { "message": "如需关闭屏蔽，请点击工具栏上的扩展图标进行切换。" }
 }
