@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "YouTube Shorts Blocker",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "default_locale": "en",
   "description": "__MSG_appDescription__",
   "permissions": ["storage"],
@@ -26,6 +26,7 @@
     {
       "matches": ["*://*.youtube.com/*"],
       "js": ["src/content.js"],
+      "css": ["src/hide.css"],
       "run_at": "document_start",
       "all_frames": false
     }

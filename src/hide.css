@@ -1,0 +1,33 @@
+/* YouTube Shorts Blocker — 쇼츠 진입점 숨김 (플래시 없는 CSS 방식)
+ *
+ * 규칙은 <html class="ysb-on"> 일 때만 적용된다. content.js 가 document_start
+ * 에서 이 클래스를 즉시 붙여(기본 켜짐) 콘텐츠가 그려지기 전에 숨기므로 깜빡임이
+ * 없다. 차단을 끄면 클래스를 떼어 즉시 원복된다.
+ *
+ * 최신 CSS :has() 로 "쇼츠를 포함한 섹션/카드"를 통째로 숨겨, MutationObserver
+ * 없이도 새로 그려지는 쇼츠가 자동으로 숨겨진다. (Chrome 105+ 필요)
+ * 참고 패턴: rachsmith.com/remove-youtube-shorts, github.com/fvnky07/youtube-shorts-blocker
+ */
+
+/* 홈·구독·검색의 쇼츠 '선반(shelf)'과 이를 감싼 섹션 */
+html.ysb-on ytd-reel-shelf-renderer,
+html.ysb-on ytd-rich-shelf-renderer[is-shorts],
+html.ysb-on ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]),
+html.ysb-on ytd-rich-section-renderer:has(ytd-reel-shelf-renderer),
+html.ysb-on grid-shelf-view-model,
+
+/* 개별 쇼츠 카드/아이템 (/shorts 링크를 품은 컨테이너) */
+html.ysb-on ytd-reel-item-renderer,
+html.ysb-on ytm-shorts-lockup-view-model,
+html.ysb-on ytd-rich-item-renderer:has(a[href^="/shorts"]),
+html.ysb-on ytd-video-renderer:has(a[href^="/shorts"]),
+html.ysb-on ytd-grid-video-renderer:has(a[href^="/shorts"]),
+html.ysb-on ytd-compact-video-renderer:has(a[href^="/shorts"]),
+
+/* 좌측 사이드바 / 미니 사이드바의 'Shorts' 메뉴 항목 */
+html.ysb-on ytd-guide-entry-renderer:has(a[href^="/shorts"]),
+html.ysb-on ytd-mini-guide-entry-renderer:has(a[href^="/shorts"]),
+html.ysb-on ytd-guide-entry-renderer:has(a[title="Shorts"]),
+html.ysb-on ytd-mini-guide-entry-renderer:has(a[title="Shorts"]) {
+  display: none !important;
+}
