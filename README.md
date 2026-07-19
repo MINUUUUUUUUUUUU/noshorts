@@ -55,6 +55,11 @@ noshorts/
 └── icons/               # 확장 아이콘 (16/32/48/128) + logo.png(마스터)
 ```
 
+## 배포 / 스토어 등록
+
+- 개인정보처리방침: [PRIVACY.md](PRIVACY.md) (데이터 미수집)
+- Chrome Web Store 리스팅 원고(복붙용): [store/listing.md](store/listing.md)
+
 ## 라이선스
 
 [MIT](LICENSE)
