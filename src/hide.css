@@ -14,7 +14,8 @@ html.ysb-on ytd-reel-shelf-renderer,
 html.ysb-on ytd-rich-shelf-renderer[is-shorts],
 html.ysb-on ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]),
 html.ysb-on ytd-rich-section-renderer:has(ytd-reel-shelf-renderer),
-html.ysb-on grid-shelf-view-model,
+html.ysb-on grid-shelf-view-model:has(a[href^="/shorts/"]),
+html.ysb-on grid-shelf-view-model:has(a[href^="https://www.youtube.com/shorts/"]),
 
 /* 개별 쇼츠 카드/아이템 (/shorts 링크를 품은 컨테이너) */
 html.ysb-on ytd-reel-item-renderer,
@@ -29,5 +30,13 @@ html.ysb-on ytd-guide-entry-renderer:has(a[href^="/shorts"]),
 html.ysb-on ytd-mini-guide-entry-renderer:has(a[href^="/shorts"]),
 html.ysb-on ytd-guide-entry-renderer:has(a[title="Shorts"]),
 html.ysb-on ytd-mini-guide-entry-renderer:has(a[title="Shorts"]) {
+  display: none !important;
+}
+
+/* 새 Shorts 잠금 카드와 절대 URL을 사용하는 렌더러. 일반 영상은 유지한다. */
+html.ysb-on yt-shorts-lockup-view-model,
+html.ysb-on ytd-rich-item-renderer:has(a[href^="https://www.youtube.com/shorts/"]),
+html.ysb-on ytd-video-renderer:has(a[href^="https://www.youtube.com/shorts/"]),
+html.ysb-on ytd-compact-video-renderer:has(a[href^="https://www.youtube.com/shorts/"]) {
   display: none !important;
 }

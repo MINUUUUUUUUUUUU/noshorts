@@ -33,7 +33,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["src/blocked.html", "src/blocked.js"],
+      "resources": ["src/blocked.html"],
       "matches": ["*://*.youtube.com/*"]
     }
   ]

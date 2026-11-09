@@ -15,15 +15,31 @@ const KEY_ENABLED = "enabled";
 const KEY_SHOW_VIDEO = "showVideo";
 const HIDE_CLASS = "ysb-on";
 
-const ROOT = document.documentElement;
 const BLOCK_PAGE = chrome.runtime.getURL("src/blocked.html");
 
 let enabled = true; // 마스터 on/off
+let settingsLoaded = false;
 let showVideo = false; // false=차단 페이지, true=일반 watch로 표시
 
 // 콘텐츠가 그려지기 전에 즉시 숨김 활성화(기본 켜짐 가정) → 깜빡임 방지.
 // 저장된 값이 꺼짐이면 아래 storage 콜백에서 해제한다.
-ROOT.classList.add(HIDE_CLASS);
+function syncRootClass() {
+  if (document.documentElement) {
+    document.documentElement.classList.toggle(HIDE_CLASS, enabled);
+  }
+}
+
+syncRootClass();
+// document_start에서는 아직 <html>이 없을 수 있다.
+if (!document.documentElement) {
+  const rootObserver = new MutationObserver(() => {
+    if (document.documentElement) {
+      syncRootClass();
+      rootObserver.disconnect();
+    }
+  });
+  rootObserver.observe(document, { childList: true });
+}
 
 // ---- 쇼츠 URL 판별/리다이렉트 ----------------------------------------------
 
@@ -46,7 +62,7 @@ function shortsVideoId(urlString) {
 }
 
 function handleShorts() {
-  if (!enabled) return;
+  if (!settingsLoaded || !enabled) return;
   if (!isShortsPath(location.href)) return;
 
   if (showVideo) {
@@ -66,12 +82,9 @@ function handleShorts() {
 // ---- 상태 반영 --------------------------------------------------------------
 
 function applyState() {
-  ROOT.classList.toggle(HIDE_CLASS, enabled);
+  syncRootClass();
   handleShorts();
 }
-
-// 최초 진입
-handleShorts();
 
 // YouTube 내부 내비게이션(SPA) 이벤트
 window.addEventListener("yt-navigate-start", handleShorts, true);
@@ -90,15 +103,16 @@ setInterval(() => {
 chrome.storage.sync.get(
   { [KEY_ENABLED]: true, [KEY_SHOW_VIDEO]: false },
   (result) => {
-    enabled = result[KEY_ENABLED];
-    showVideo = result[KEY_SHOW_VIDEO];
+    enabled = result[KEY_ENABLED] !== false;
+    showVideo = result[KEY_SHOW_VIDEO] === true;
+    settingsLoaded = true;
     applyState();
   }
 );
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area !== "sync") return;
-  if (changes[KEY_ENABLED]) enabled = changes[KEY_ENABLED].newValue;
-  if (changes[KEY_SHOW_VIDEO]) showVideo = changes[KEY_SHOW_VIDEO].newValue;
+  if (changes[KEY_ENABLED]) enabled = changes[KEY_ENABLED].newValue !== false;
+  if (changes[KEY_SHOW_VIDEO]) showVideo = changes[KEY_SHOW_VIDEO].newValue === true;
   applyState();
 });
