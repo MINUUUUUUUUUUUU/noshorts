@@ -16,7 +16,7 @@ YouTube **쇼츠(Shorts)** 의 무한 스크롤에 빠지지 않도록 막아주
   - 켜짐(표시): `/shorts/<id>` → `/watch?v=<id>` 로 보내 같은 영상을 **일반 플레이어**로 시청
   - 꺼짐(차단): 확장 자체의 **차단 안내 페이지**로 보내 영상 자체를 띄우지 않음
 - 홈·검색·사이드바의 **쇼츠 칸/링크(진입점) 숨김** — 클래스 게이트 CSS(`:has()`)로
-  깜빡임 없이 즉시 숨기고, 새로 그려지는 쇼츠도 자동 처리(MutationObserver 불필요)
+  초기 숨김을 적용하고, 새로 그려지는 쇼츠도 CSS로 자동 처리
 - YouTube는 SPA(단일 페이지 앱)라 앱 내부 이동도 함께 처리
   (내비게이션 이벤트 + 폴링 안전망)
 - 설정은 `chrome.storage.sync` 에 저장
@@ -63,3 +63,12 @@ noshorts/
 ## 라이선스
 
 [MIT](LICENSE)
+
+## 개발 검증
+
+별도 빌드나 npm 의존성 설치 없이 저장소 폴더를 확장으로 로드합니다.
+
+- `node --test tests/content.test.cjs`: 초기 설정, DOM 생성 시점, SPA 이동 회귀 검사
+- `python tests/browser-smoke.py`: Playwright와 `/usr/bin/chromium`이 설치된 환경에서 UI·CSS 검사
+
+브라우저 검사는 Chrome API와 YouTube 응답을 대체한 로컬 검사이며, 실제 확장 로드나 YouTube 최신 DOM 전체를 검증하지 않습니다. 관리형 브라우저의 확장 설치 정책이 허용하는 경우 개발자 모드로 로드해 추가 확인합니다.

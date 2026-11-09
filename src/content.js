@@ -9,7 +9,7 @@
 // 쇼츠 진입점(선반/카드/사이드바 메뉴)의 '숨김'은 hide.css 가 담당한다.
 // 이 스크립트는 (1) 숨김을 켜고 끄는 html.ysb-on 클래스 토글, (2) 쇼츠 URL
 // 접근 시 리다이렉트만 맡는다. 숨김을 CSS(:has())로 옮겨 MutationObserver 없이
-// 새 콘텐츠가 자동 처리되고 깜빡임도 없다.
+// 새 콘텐츠가 자동 처리된다.
 
 const KEY_ENABLED = "enabled";
 const KEY_SHOW_VIDEO = "showVideo";
@@ -47,7 +47,7 @@ function isShortsPath(urlString) {
   try {
     const p = new URL(urlString).pathname;
     return p === "/shorts" || p.startsWith("/shorts/");
-  } catch (e) {
+  } catch {
     return false;
   }
 }
@@ -56,7 +56,7 @@ function shortsVideoId(urlString) {
   try {
     const m = new URL(urlString).pathname.match(/^\/shorts\/([^/?#]+)/);
     return m ? m[1] : null;
-  } catch (e) {
+  } catch {
     return null;
   }
 }

@@ -11,9 +11,9 @@ const toggleShow = document.getElementById("toggle-show");
 const rowShow = document.getElementById("row-show");
 const status = document.getElementById("status");
 
-// chrome.i18n 으로 메시지 조회 (없으면 기존 텍스트 유지)
+// chrome.i18n으로 메시지 조회 (없는 키는 빈 문자열 반환)
 function t(key) {
-  return chrome.i18n.getMessage(key) || "";
+  return chrome.i18n.getMessage(key);
 }
 
 // data-i18n 속성이 붙은 모든 요소를 사용자 언어로 채운다.

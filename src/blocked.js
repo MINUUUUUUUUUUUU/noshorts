@@ -3,7 +3,7 @@
 
 // chrome.i18n 으로 사용자 언어에 맞게 텍스트/문서 제목을 채운다.
 function t(key) {
-  return chrome.i18n.getMessage(key) || "";
+  return chrome.i18n.getMessage(key);
 }
 
 document.querySelectorAll("[data-i18n]").forEach((el) => {
@@ -21,7 +21,7 @@ document.getElementById("home").addEventListener("click", () => {
 });
 
 document.getElementById("back").addEventListener("click", () => {
-  // 직전 페이지가 쇼츠였다면 다시 막히므로, 히스토리가 있으면 두 칸 전으로.
+  // replace로 쇼츠 진입 기록을 대체하므로 이전 페이지로 한 칸 돌아간다.
   if (history.length > 1) {
     history.back();
   } else {
