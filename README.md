@@ -72,3 +72,7 @@ noshorts/
 - `python tests/browser-smoke.py`: Playwright와 `/usr/bin/chromium`이 설치된 환경에서 UI·CSS 검사
 
 브라우저 검사는 Chrome API와 YouTube 응답을 대체한 로컬 검사이며, 실제 확장 로드나 YouTube 최신 DOM 전체를 검증하지 않습니다. 관리형 브라우저의 확장 설치 정책이 허용하는 경우 개발자 모드로 로드해 추가 확인합니다.
+
+## 스토어 자동 업데이트
+
+`main` push 시 Chrome Web Store 업데이트 ZIP을 만들고, 계정 연결 후 자동으로 심사를 요청합니다. 최초 OAuth 연결과 버전·재시도 정책은 [자동화 설정 안내](store/automation.md)를 참고하세요.

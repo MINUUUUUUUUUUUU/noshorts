@@ -1,0 +1,49 @@
+name: Chrome Web Store
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: chrome-web-store
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Test
+        run: |
+          node --test tests/content.test.cjs
+          python3 -m unittest discover -s tests -p 'test_webstore.py' -v
+      - name: Package with a unique store version
+        env:
+          STORE_RUN_NUMBER: ${{ github.run_number }}
+        run: python3 scripts/webstore.py package --run-number "$STORE_RUN_NUMBER"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: noshorts-webstore
+          path: noshorts-webstore.zip
+      - name: Submit update for review
+        if: vars.CWS_ENABLED == 'true' && github.ref == 'refs/heads/main'
+        env:
+          CWS_PUBLISHER_ID: 086c7f23-71df-4cf3-b214-b6f6a51f14b7
+          CWS_EXTENSION_ID: akfmjlfeanibkgichgmfpnmjlekacmfl
+          CWS_CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+        run: python3 scripts/webstore.py publish
+      - name: Explain pending account setup
+        if: vars.CWS_ENABLED != 'true'
+        run: echo 'Store submission is disabled. Complete store/automation.md and set CWS_ENABLED=true.' >> "$GITHUB_STEP_SUMMARY"

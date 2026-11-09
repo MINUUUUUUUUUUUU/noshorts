@@ -22,3 +22,7 @@ Thumbs.db
 .idea/
 .vscode/
 *.log
+
+# Python test caches
+__pycache__/
+*.pyc
