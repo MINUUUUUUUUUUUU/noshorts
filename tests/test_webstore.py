@@ -36,10 +36,35 @@ class WebStoreTests(unittest.TestCase):
         self.assertEqual(webstore.submission_action({'publishedItemRevisionStatus': revision('1.4.0.12')}, '1.4.0.12'), 'already published')
         self.assertEqual(webstore.submission_action({'submittedItemRevisionStatus': revision('1.4.0.12', 'PENDING_REVIEW')}, '1.4.0.12'), 'already submitted')
 
-    def test_other_pending_version_and_downgrades_are_blocked(self):
-        for status in ({'submittedItemRevisionStatus': revision('1.4.0.11', 'PENDING_REVIEW')}, {'publishedItemRevisionStatus': revision('1.5.0')}):
-            with self.assertRaises(RuntimeError):
-                webstore.submission_action(status, '1.4.0.12')
+    def test_pending_review_is_deferred_then_latest_version_is_submitted(self):
+        pending = {'submittedItemRevisionStatus': revision('1.4.0.11', 'PENDING_REVIEW')}
+        self.assertTrue(webstore.submission_action(pending, '1.4.0.12').startswith('WAITING_FOR_REVIEW'))
+        completed = {'publishedItemRevisionStatus': revision('1.4.0.11')}
+        self.assertEqual(webstore.submission_action(completed, '1.4.0.12'), 'upload')
+        completed = {'publishedItemRevisionStatus': revision('1.4.0.12')}
+        self.assertEqual(webstore.submission_action(completed, '1.4.0.12'), 'already published')
+
+    def test_downgrades_are_blocked(self):
+        with self.assertRaises(RuntimeError):
+            webstore.submission_action({'publishedItemRevisionStatus': revision('1.5.0')}, '1.4.0.12')
+
+    def test_repeated_packaging_keeps_same_version(self):
+        with tempfile.TemporaryDirectory() as directory:
+            versions = [webstore.package(12, Path(directory) / f'{n}.zip') for n in range(2)]
+            self.assertEqual(versions[0], versions[1])
+
+    def test_waiting_does_not_upload_or_publish(self):
+        env = dict.fromkeys(('CWS_PUBLISHER_ID', 'CWS_EXTENSION_ID', 'CWS_CLIENT_ID', 'CWS_CLIENT_SECRET', 'CWS_REFRESH_TOKEN'), 'test')
+        calls = []
+        responses = iter([{'access_token': 'fake'}, {'submittedItemRevisionStatus': revision('1.4.0.11', 'PENDING_REVIEW')}])
+        def call(url, **kwargs):
+            calls.append(url)
+            return next(responses)
+        with tempfile.TemporaryDirectory() as directory:
+            archive = Path(directory) / 'extension.zip'
+            webstore.package(12, archive)
+            self.assertTrue(webstore.publish(archive, env=env, call=call).startswith('WAITING_FOR_REVIEW'))
+        self.assertEqual(len(calls), 2)
 
     def test_upload_poll_then_submit_and_failure_never_publishes(self):
         env = dict.fromkeys(('CWS_PUBLISHER_ID', 'CWS_EXTENSION_ID', 'CWS_CLIENT_ID', 'CWS_CLIENT_SECRET', 'CWS_REFRESH_TOKEN'), 'test')

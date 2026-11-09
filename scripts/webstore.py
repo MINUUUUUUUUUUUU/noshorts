@@ -14,12 +14,12 @@ ROOT = Path(__file__).resolve().parents[1]
 API = 'https://chromewebstore.googleapis.com/'
 
 
-def package(run_number, output):
+def package(revision, output):
     manifest = json.loads((ROOT / 'manifest.json').read_text())
     base = manifest['version'].split('.')
-    if len(base) != 3 or not 1 <= run_number <= 65535:
-        raise ValueError('Use a three-part manifest version and run number 1..65535; see store/automation.md.')
-    manifest['version'] = '.'.join(base + [str(run_number)])
+    if len(base) != 3 or not 1 <= revision <= 65535:
+        raise ValueError('Use a three-part manifest version and revision 1..65535; see store/automation.md.')
+    manifest['version'] = '.'.join(base + [str(revision)])
     with zipfile.ZipFile(output, 'w', zipfile.ZIP_DEFLATED) as archive:
         archive.writestr('manifest.json', json.dumps(manifest, ensure_ascii=False, indent=2))
         for directory in ('src', 'icons', '_locales'):
@@ -62,7 +62,7 @@ def submission_action(status, version):
     if submitted.get('state') in ('PENDING_REVIEW', 'STAGED'):
         if version in versions(submitted):
             return 'already submitted'
-        raise RuntimeError('Another version is pending review/staged. Retry this run after it finishes; it will not be cancelled automatically.')
+        return 'WAITING_FOR_REVIEW: another version is pending; the scheduled run will check the latest main again.'
     if any(version_tuple(v) >= version_tuple(version) for v in versions(published)):
         raise RuntimeError('Package version must exceed the published version. Increase manifest.json base version.')
     if submitted.get('state') == 'REJECTED' and version in versions(submitted):
@@ -112,11 +112,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=['package', 'publish'])
     parser.add_argument('--archive', default='noshorts-webstore.zip')
-    parser.add_argument('--run-number', type=int)
+    parser.add_argument('--revision', '--run-number', dest='revision', type=int)
     args = parser.parse_args()
     try:
         if args.action == 'package':
-            print(package(args.run_number or 0, args.archive))
+            print(package(args.revision or 0, args.archive))
         else:
             print(publish(args.archive))
     except (ValueError, RuntimeError, OSError, KeyError) as error:
