@@ -68,7 +68,7 @@ noshorts/
 
 별도 빌드나 npm 의존성 설치 없이 저장소 폴더를 확장으로 로드합니다.
 
-- `node --test tests/content.test.cjs`: 초기 설정, DOM 생성 시점, SPA 이동 회귀 검사
+- `node --test tests/*.test.cjs`: 초기 설정, DOM 생성 시점, SPA 이동 회귀 검사
 - `python tests/browser-smoke.py`: Playwright와 `/usr/bin/chromium`이 설치된 환경에서 UI·CSS 검사
 
 브라우저 검사는 Chrome API와 YouTube 응답을 대체한 로컬 검사이며, 실제 확장 로드나 YouTube 최신 DOM 전체를 검증하지 않습니다. 관리형 브라우저의 확장 설치 정책이 허용하는 경우 개발자 모드로 로드해 추가 확인합니다.

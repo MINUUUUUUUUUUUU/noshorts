@@ -31,7 +31,7 @@ jobs:
           node-version: '24'
       - name: Test
         run: |
-          node --test tests/content.test.cjs
+          node --test tests/*.test.cjs
           python3 -m unittest discover -s tests -p 'test_webstore.py' -v
       - name: Package with a stable version for this main commit
         run: |

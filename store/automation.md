@@ -48,7 +48,7 @@ main 이력을 강제로 다시 쓰지 마세요. 스토어의 기존 버전이 
 ## 로컬 검증
 
 ```sh
-node --test tests/content.test.cjs
+node --test tests/*.test.cjs
 python3 -m unittest discover -s tests -p 'test_webstore.py' -v
 python3 scripts/webstore.py package --revision 1 --archive /tmp/noshorts-webstore.zip
 ```

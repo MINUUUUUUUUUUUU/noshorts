@@ -47,10 +47,6 @@
       .row + .row {
         border-top: 1px solid #eee;
       }
-      .row.disabled {
-        opacity: 0.4;
-        pointer-events: none;
-      }
       .label {
         font-size: 14px;
         font-weight: 600;
@@ -135,7 +131,7 @@
         <div class="desc" data-i18n="popupBlockDesc">Blocks Shorts pages and entry points.</div>
       </div>
       <label class="switch">
-        <input type="checkbox" id="toggle-enabled" />
+        <input type="checkbox" id="toggle-enabled" disabled />
         <span class="slider"></span>
       </label>
     </div>
@@ -146,7 +142,7 @@
         <div class="desc" data-i18n="popupShowDesc">On: open as a normal video. Off: send to the block page.</div>
       </div>
       <label class="switch">
-        <input type="checkbox" id="toggle-show" />
+        <input type="checkbox" id="toggle-show" disabled />
         <span class="slider"></span>
       </label>
     </div>

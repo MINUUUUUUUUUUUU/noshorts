@@ -8,7 +8,7 @@
 //
 // 쇼츠 진입점(선반/카드/사이드바 메뉴)의 '숨김'은 hide.css 가 담당한다.
 // 이 스크립트는 (1) 숨김을 켜고 끄는 html.ysb-on 클래스 토글, (2) 쇼츠 URL
-// 접근 시 리다이렉트만 맡는다. 숨김을 CSS(:has())로 옮겨 MutationObserver 없이
+// 접근 시 리다이렉트만 맡는다. 쇼츠 목록의 숨김은 CSS(:has())로 처리해
 // 새 콘텐츠가 자동 처리된다.
 
 const KEY_ENABLED = "enabled";
@@ -19,6 +19,7 @@ const BLOCK_PAGE = chrome.runtime.getURL("src/blocked.html");
 
 let enabled = true; // 마스터 on/off
 let settingsLoaded = false;
+const changedDuringLoad = new Set();
 let showVideo = false; // false=차단 페이지, true=일반 watch로 표시
 
 // 콘텐츠가 그려지기 전에 즉시 숨김 활성화(기본 켜짐 가정) → 깜빡임 방지.
@@ -99,20 +100,27 @@ setInterval(() => {
   }
 }, 500);
 
-// 저장된 설정 로드 & 변경 반영
+// 초기 읽기보다 최신 변경 이벤트가 우선한다. 키별로 병합해 다른 설정도 보존한다.
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area !== "sync") return;
+  if (changes[KEY_ENABLED]) {
+    enabled = changes[KEY_ENABLED].newValue !== false;
+    if (!settingsLoaded) changedDuringLoad.add(KEY_ENABLED);
+  }
+  if (changes[KEY_SHOW_VIDEO]) {
+    showVideo = changes[KEY_SHOW_VIDEO].newValue === true;
+    if (!settingsLoaded) changedDuringLoad.add(KEY_SHOW_VIDEO);
+  }
+  applyState();
+});
+
 chrome.storage.sync.get(
   { [KEY_ENABLED]: true, [KEY_SHOW_VIDEO]: false },
   (result) => {
-    enabled = result[KEY_ENABLED] !== false;
-    showVideo = result[KEY_SHOW_VIDEO] === true;
+    if (!changedDuringLoad.has(KEY_ENABLED)) enabled = result[KEY_ENABLED] !== false;
+    if (!changedDuringLoad.has(KEY_SHOW_VIDEO)) showVideo = result[KEY_SHOW_VIDEO] === true;
     settingsLoaded = true;
+    changedDuringLoad.clear();
     applyState();
   }
 );
-
-chrome.storage.onChanged.addListener((changes, area) => {
-  if (area !== "sync") return;
-  if (changes[KEY_ENABLED]) enabled = changes[KEY_ENABLED].newValue !== false;
-  if (changes[KEY_SHOW_VIDEO]) showVideo = changes[KEY_SHOW_VIDEO].newValue === true;
-  applyState();
-});

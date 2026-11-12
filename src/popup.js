@@ -8,7 +8,10 @@ const KEY_SHOW_VIDEO = "showVideo";
 
 const toggleEnabled = document.getElementById("toggle-enabled");
 const toggleShow = document.getElementById("toggle-show");
-const rowShow = document.getElementById("row-show");
+const changedDuringLoad = new Set();
+let settingsLoaded = false;
+let enabled = true;
+let showVideo = false;
 const status = document.getElementById("status");
 
 // chrome.i18n으로 메시지 조회 (없는 키는 빈 문자열 반환)
@@ -24,12 +27,13 @@ function applyStaticI18n() {
   });
 }
 
-function render(enabled, showVideo) {
+function render() {
   toggleEnabled.checked = enabled;
   toggleShow.checked = showVideo;
 
-  // 차단이 꺼져 있으면 표시 방식 선택은 의미가 없으므로 비활성화.
-  rowShow.classList.toggle("disabled", !enabled);
+  // 마스터가 꺼져 있어도 다음에 사용할 영상 표시 설정은 변경할 수 있다.
+  toggleEnabled.disabled = !settingsLoaded;
+  toggleShow.disabled = !settingsLoaded;
 
   if (!enabled) {
     status.textContent = t("statusOff");
@@ -42,22 +46,39 @@ function render(enabled, showVideo) {
 
 applyStaticI18n();
 
-// 저장된 상태 로드 (기본값: 차단 켜짐 / 영상 표시 끔)
+// 초기 읽기 중에는 입력을 막고, 다른 팝업/기기에서 변경한 값도 반영한다.
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area !== "sync") return;
+  if (changes[KEY_ENABLED]) {
+    enabled = changes[KEY_ENABLED].newValue !== false;
+    if (!settingsLoaded) changedDuringLoad.add(KEY_ENABLED);
+  }
+  if (changes[KEY_SHOW_VIDEO]) {
+    showVideo = changes[KEY_SHOW_VIDEO].newValue === true;
+    if (!settingsLoaded) changedDuringLoad.add(KEY_SHOW_VIDEO);
+  }
+  if (settingsLoaded) render();
+});
+
 chrome.storage.sync.get(
   { [KEY_ENABLED]: true, [KEY_SHOW_VIDEO]: false },
   (result) => {
-    render(result[KEY_ENABLED], result[KEY_SHOW_VIDEO]);
+    if (!changedDuringLoad.has(KEY_ENABLED)) enabled = result[KEY_ENABLED] !== false;
+    if (!changedDuringLoad.has(KEY_SHOW_VIDEO)) showVideo = result[KEY_SHOW_VIDEO] === true;
+    settingsLoaded = true;
+    changedDuringLoad.clear();
+    render();
   }
 );
 
 toggleEnabled.addEventListener("change", () => {
-  chrome.storage.sync.set({ [KEY_ENABLED]: toggleEnabled.checked }, () => {
-    render(toggleEnabled.checked, toggleShow.checked);
-  });
+  enabled = toggleEnabled.checked;
+  render();
+  chrome.storage.sync.set({ [KEY_ENABLED]: enabled });
 });
 
 toggleShow.addEventListener("change", () => {
-  chrome.storage.sync.set({ [KEY_SHOW_VIDEO]: toggleShow.checked }, () => {
-    render(toggleEnabled.checked, toggleShow.checked);
-  });
+  showVideo = toggleShow.checked;
+  render();
+  chrome.storage.sync.set({ [KEY_SHOW_VIDEO]: showVideo });
 });

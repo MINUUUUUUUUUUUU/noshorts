@@ -55,3 +55,29 @@ test('SPA navigation and removed settings restore defaults', () => {
   s.changed({ enabled: { newValue: undefined }, showVideo: { newValue: undefined } });
   assert.deepEqual(s.redirects, ['chrome-extension://test/src/blocked.html']);
 });
+
+test('late initial read cannot undo turning blocking off', () => {
+  const s = load();
+  s.changed({ enabled: { newValue: false } });
+  s.read({ enabled: true, showVideo: true });
+  s.listeners['yt-navigate-finish']();
+  assert.deepEqual(s.redirects, []);
+  assert.equal(s.classes.has('ysb-on'), false);
+});
+test('late initial read preserves newer showVideo preference', () => {
+  const s = load();
+  s.changed({ showVideo: { newValue: true } });
+  s.read({ enabled: true, showVideo: false });
+  assert.deepEqual(s.redirects, ['https://www.youtube.com/watch?v=example']);
+});
+test('turning blocking off leaves both video preferences unrestricted on SPA navigation', () => {
+  for (const showVideo of [true, false]) {
+    const s = load({ url: 'https://www.youtube.com/' });
+    s.read({ enabled: true, showVideo });
+    s.changed({ enabled: { newValue: false } });
+    s.location.href = 'https://www.youtube.com/shorts/example';
+    s.listeners['yt-navigate-finish']();
+    assert.deepEqual(s.redirects, []);
+    assert.equal(s.classes.has('ysb-on'), false);
+  }
+});
