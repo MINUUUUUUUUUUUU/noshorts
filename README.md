@@ -75,4 +75,4 @@ noshorts/
 
 ## 스토어 자동 업데이트
 
-`main` push 시 Chrome Web Store 업데이트 ZIP을 만들고, 계정 연결 후 자동으로 심사를 요청합니다. 최초 OAuth 연결과 버전·재시도 정책은 [자동화 설정 안내](store/automation.md)를 참고하세요.
+현재 계정 잠금으로 자동 배포를 일시 중단했습니다. `main` push 및 정기 실행은 꺼져 있고, Chrome Web Store 제출과 GitHub Release 생성은 Actions에서 수동으로만 실행할 수 있습니다. 최초 OAuth 연결과 버전·재시도 정책은 [자동화 설정 안내](store/automation.md)를 참고하세요.

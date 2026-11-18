@@ -1,12 +1,11 @@
 name: Release extension
 
-# main 에 push될 때 manifest.json 의 버전을 읽어,
+# 수동 실행 시 manifest.json 의 버전을 읽어,
 # 같은 버전 태그가 아직 없으면 git 태그 + GitHub Release(확장 zip 첨부)를 만든다.
 # Actions 자체 토큰(GITHUB_TOKEN)만 사용하므로 별도 PAT 저장이 필요 없다.
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: write
